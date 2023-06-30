@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Practical_14.Models.employee>
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>Employee</h2>
+
+<div class="mt-3 mb-3">
+	<p class="float-start">
+		@Html.ActionLink("Create New", "Create", string.Empty, new { @class = "btn btn-success btn-sm" })
+	</p>
+	<p class="float-end">
+		<input class="form-control" id="search" type="text" placeholder="Search by name Here" />
+	</p>
+</div>
+
+<table class="table table-light table-striped text-center">
+	<thead class="table-dark">
+		<tr>
+			<th>
+				@Html.DisplayNameFor(model => model.Name)
+			</th>
+			<th>
+				Date of Birth (YYYY-MM-DD)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.Age)
+			</th>
+			<th>
+				Actions
+			</th>
+		</tr>
+	</thead>
+	<tbody id="fillHere">
+		@foreach (var item in Model)
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.Name)
+				</td>
+				<td>
+					@Html.DisplayFor(modelItem => item.DOB)
+				</td>
+				@if (item.Age == null)
+				{
+					<td>NA</td>
+				}
+				else
+				{
+					<td>
+						@Html.DisplayFor(modelItem => item.Age)
+					</td>
+				}
+
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-sm btn-warning" }) |
+					@Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-sm btn-success" }) |
+					@Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-sm btn-danger" })
+				</td>
+			</tr>
+		}
+	</tbody>
+</table>
+
+
+<div class="d-flex justify-content-center"><button class="btn btn-success btn-sm" id="Previous">Previous</button>  &nbsp; Current Page : &nbsp;<span id="PageNo">1</span>&nbsp;<button class="btn btn-success btn-sm" id="Next">Next</button></div>
+
+@section scripts 
+{
+	<script src="~/Content/CustomeJS/Search.js"></script>
+	
+}
